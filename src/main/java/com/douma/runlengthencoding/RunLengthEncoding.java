@@ -4,15 +4,26 @@ public class RunLengthEncoding
 {
     public String to(String chars)
     {
-        if(chars == "AABCCCDEEEE") {
-            return "2A1B3C1D4E";
-        } else if(chars == "AAABBB") {
-            return "3A3B";
-        } else if(chars == "AAABBBCCC") {
-            return "3A3B3C";
-        } else if(chars == "AAABBBCCCD") {
-            return "3A3B3C1D";
+        String prevChar = "";
+        String currentChar = "";
+        String output = "";
+        int count = 0;
+
+        for (int i = 0; i < chars.length(); i++) {
+            currentChar = String.valueOf(chars.charAt(i));
+            if(prevChar.equals(currentChar))
+            {
+                //...nothing
+            } else {
+                if(!prevChar.equals("")) {
+                    output += String.valueOf(count) + prevChar;
+                    count = 0;
+                }
+            }
+            count += 1;
+            prevChar = currentChar;
         }
-        return "";
+        output += String.valueOf(count) + currentChar;
+        return output;
     }
 }
