@@ -1,5 +1,7 @@
 package com.douma.runlengthencoding;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class RunLengthEncoding
 {
     public String to(String chars)
@@ -29,16 +31,30 @@ public class RunLengthEncoding
 
     public String from(String chars)
     {
-        if(chars.equals("2A1B3C1D4E")) {
-            return "AABCCCDEEEE";
-        } else if(chars.equals("3A3B")) {
-            return "AAABBB";
-        } else if(chars.equals("3A3B3C")) {
-            return "AAABBBCCC";
-        } else if(chars.equals("3A3B3C1D")) {
-            return "AAABBBCCCD";
-        }
+        String currentChar = "";
+        String previousChar = "";
+        boolean currentCharIsInteger;
+        boolean previousCharIsInteger;
+        String count = "";
+        String output = "";
 
-        return "";
+        for (int i = 0; i < chars.length(); i++) {
+            currentChar = String.valueOf(chars.charAt(i));
+            currentCharIsInteger = currentChar.matches("-?\\d+");
+            previousCharIsInteger = previousChar.matches("-?\\d+");
+
+            if(currentCharIsInteger && previousCharIsInteger) {
+                count += currentChar;
+                previousChar = currentChar;
+                continue;
+            } else if(currentCharIsInteger) {
+                count = currentChar;
+                previousChar = currentChar;
+                continue;
+            }
+            output += StringUtils.leftPad("", Integer.valueOf(count), currentChar);
+            previousChar = currentChar;
+        }
+        return output;
     }
 }
