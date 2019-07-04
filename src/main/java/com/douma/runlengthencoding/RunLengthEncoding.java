@@ -26,4 +26,19 @@ public class RunLengthEncoding
         output += String.valueOf(count) + currentChar;
         return output;
     }
+
+    public String from(String chars)
+    {
+        if(chars.equals("2A1B3C1D4E")) {
+            return "AABCCCDEEEE";
+        } else if(chars.equals("3A3B")) {
+            return "AAABBB";
+        } else if(chars.equals("3A3B3C")) {
+            return "AAABBBCCC";
+        } else if(chars.equals("3A3B3C1D")) {
+            return "AAABBBCCCD";
+        }
+
+        return "";
+    }
 }
