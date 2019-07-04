@@ -1,6 +1,6 @@
 package com.douma.runlengthencoding;
 
-public class App 
+public class App
 {
     public static void main( String[] args ) throws Exception
     {
@@ -9,6 +9,10 @@ public class App
         }
 
         RunLengthEncoding runLengthEncoding = new RunLengthEncoding();
-        System.out.println(runLengthEncoding.to(args[0]));
+        if(args[0].matches(".*\\d.*")) {
+            System.out.println(runLengthEncoding.from(args[0]));
+        } else {
+            System.out.println(runLengthEncoding.to(args[0]));
+        }
     }
 }
